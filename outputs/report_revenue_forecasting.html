@@ -1,0 +1,105 @@
+
+<html><head><meta charset='utf-8'><title>JungleCart – Revenue Forecasting</title>
+<style>
+body { font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; }
+h1,h2 { margin: 0.2em 0; }
+section { margin-bottom: 18px; }
+table { border-collapse: collapse; }
+th,td { border:1px solid #ddd; padding:6px 10px; text-align:right; }
+th:first-child, td:first-child { text-align:left; }
+small { color: #666; }
+code { background:#f6f6f6; padding:2px 4px; border-radius:4px; }
+</style></head><body>
+<h1>JungleCart – Revenue Trend Forecasting</h1>
+<small>Data window: 2018-01-01 → 2025-09-01</small>
+
+<section>
+<h2>Key Figures</h2>
+<ul>
+  <li>Latest monthly revenue: 811,213</li>
+  <li>Total months: 93</li>
+  <li>Model winner: SARIMA((0, 1, 1), (0, 1, 1, 12))</li>
+</ul>
+</section>
+
+<section>
+<h2>Model Comparison</h2>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>model</th>
+      <th>MAE</th>
+      <th>RMSE</th>
+      <th>MAPE%</th>
+      <th>sMAPE%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>SARIMA((0, 1, 1), (0, 1, 1, 12))</td>
+      <td>49,115.92</td>
+      <td>64,639.65</td>
+      <td>5.71</td>
+      <td>5.90</td>
+    </tr>
+    <tr>
+      <td>SARIMAX((0, 1, 1), (0, 1, 1, 12))+exog</td>
+      <td>49,121.85</td>
+      <td>64,651.86</td>
+      <td>5.71</td>
+      <td>5.90</td>
+    </tr>
+    <tr>
+      <td>ETS(AAA)</td>
+      <td>59,243.11</td>
+      <td>66,762.66</td>
+      <td>6.69</td>
+      <td>6.86</td>
+    </tr>
+    <tr>
+      <td>MovingAvg(k=3)</td>
+      <td>77,982.19</td>
+      <td>95,996.49</td>
+      <td>8.86</td>
+      <td>8.91</td>
+    </tr>
+    <tr>
+      <td>Naive (last)</td>
+      <td>115,865.53</td>
+      <td>135,468.28</td>
+      <td>12.60</td>
+      <td>13.72</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+
+<section>
+<h2>Figures</h2>
+<p><img src="figures/monthly_revenue_overview.png" width="720"></p>
+<p><img src="figures/stl_decomposition_monthly.png" width="720"></p>
+<p><img src="figures/final_forecast_12m_ci.png" width="720"></p>
+</section>
+
+<section>
+<h2>Artifacts</h2>
+<ul>
+  <li><code>artifacts/monthly_revenue.csv</code></li>
+  <li><code>model_metrics.csv</code></li>
+  <li><code>artifacts/model_selection.json</code></li>
+  <li><code>forecast_6m.csv</code>, <code>forecast_12m.csv</code></li>
+  <li><code>category_forecast_topN_6m.csv</code> (if available)</li>
+  <li><code>artifacts/environment_versions.json</code></li>
+</ul>
+</section>
+
+<section>
+<h2>Notes</h2>
+<ol>
+  <li>Exogenous regressors: mkt_spend</li>
+  <li>95% CI bands are shown for SARIMA/X forecasts.</li>
+  <li>Hand off <code>forecast_6m.csv</code> to Repo 03 (sales & inventory planning).</li>
+</ol>
+</section>
+
+</body></html>
